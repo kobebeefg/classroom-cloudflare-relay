@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "classroom-relay",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "durable_objects": { "bindings": [{ "name": "CLASSROOM", "class_name": "ClassroomRelay" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ClassroomRelay"] }]
+}

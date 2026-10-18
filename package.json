@@ -1,0 +1,21 @@
+{
+  "name": "classroom-cloudflare-relay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.151.1"
+  },
+  "cloudflare": {
+    "bindings": {
+      "PAIRING_KEY": {
+        "description": "貼上課堂互動站 App 產生的配對金鑰，僅儲存為 Secret，請勿提供給學生。"
+      }
+    }
+  }
+}

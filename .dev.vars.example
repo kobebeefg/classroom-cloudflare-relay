@@ -1,0 +1,2 @@
+# 在 App 按「產生配對金鑰」，將產生的 64 位英數字貼到部署表單的 PAIRING_KEY。
+PAIRING_KEY=
