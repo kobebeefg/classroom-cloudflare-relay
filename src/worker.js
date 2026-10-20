@@ -83,7 +83,9 @@ export class ClassroomRelay extends DurableObject {
     const now = Date.now(); for (const [key, record] of this.rate) if (record.until < now) this.rate.delete(key);
     const ip = request.headers.get('cf-connecting-ip') || 'local-test';
     const bucket = this.rate.get(ip) || { count: 0, until: now + 60000 };
-    if (++bucket.count > 240 || this.rate.size > 1024) return fail('連線過於頻繁，請稍後重試。', 429);
+    // A classroom can share one public IP: 60 students polling every 2 seconds
+    // already produce 1,800 requests/minute, before page loads and submissions.
+    if (++bucket.count > 2400 || this.rate.size > 1024) return fail('連線過於頻繁，請稍後重試。', 429);
     this.rate.set(ip, bucket);
     if (this.pending.size + this.reading >= 8) return fail('課堂忙碌中，請稍後重試。', 429);
     this.reading++;
